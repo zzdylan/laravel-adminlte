@@ -17,11 +17,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- Ionicons -->
 <!--  <link rel="stylesheet" href="bower_components/Ionicons/css/ionicons.min.css">-->
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('packages/admin/AdminLTE/css/AdminLTE.min.css')}}">
+  <link rel="stylesheet" href="{{asset('packages/admin/adminlte/css/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" href="{{asset('packages/admin/AdminLTE/css/skins/_all-skins.min.css')}}">
+  <link rel="stylesheet" href="{{asset('packages/admin/adminlte/css/skins/_all-skins.min.css')}}">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -87,7 +87,7 @@ desired effect
 <!-- Bootstrap 3.3.7 -->
 <script src="{{asset('packages/admin/bootstrap/js/bootstrap.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="{{asset('packages/admin/AdminLTE/js/adminlte.min.js')}}"></script>
+<script src="{{asset('packages/admin/adminlte/js/adminlte.min.js')}}"></script>
 
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
