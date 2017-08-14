@@ -13,7 +13,7 @@
   <!-- Ionicons -->
 <!--  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">-->
   <!-- Theme style -->
-  <link rel="stylesheet" href="{{asset('packages/admin/AdminLTE/css/AdminLTE.min.css')}}">
+  <link rel="stylesheet" href="{{asset('packages/admin/adminlte/css/AdminLTE.min.css')}}">
   <!-- iCheck -->
   <link rel="stylesheet" href="{{asset('packages/admin/iCheck/square/blue.css')}}">
 
