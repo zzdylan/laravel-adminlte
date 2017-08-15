@@ -53,8 +53,8 @@
         <div class="box-footer">
             <div class="col-md-2"></div>
             <div class="btn-group col-md-8">
-                <button type="reset" class="btn btn-circle grey-salsa btn-outline">取消</button>
-                <button type="submit" class="btn btn-circle green">提交</button>
+                <button type="reset" class="btn btn-warning pull-left">取消</button>
+                <button type="submit" class="btn btn-info pull-right">提交</button>
             </div>
         </div>
     </form>

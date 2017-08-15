@@ -120,13 +120,7 @@ desired effect
     $(".sidebar-toggle").click(function() {
         //console.log($("body").attr('class'));
         var flag = getFlag();
-        if (flag == 0) {
-            $.cookie('sidebar', '0', {path: '/'});
-            //console.log('写入闭合cookie');
-        } else if (flag == 1) {
-            $.cookie('sidebar', '1', {path: '/'});
-            //console.log('写入展开cookie');
-        }
+        $.cookie('sidebar', flag, {path: '/'})
     });
     function getFlag() {
         var str = $("body").attr('class');

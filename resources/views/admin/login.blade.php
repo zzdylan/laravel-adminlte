@@ -9,7 +9,7 @@
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" href="{{asset('packages/admin/bootstrap/css/bootstrap.min.css')}}">
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{asset('packages/admin/packages/fone-awesome/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" href="{{asset('packages/admin/font-awesome/css/font-awesome.min.css')}}">
   <!-- Ionicons -->
 <!--  <link rel="stylesheet" href="../../bower_components/Ionicons/css/ionicons.min.css">-->
   <!-- Theme style -->
@@ -77,7 +77,7 @@
 <script src="{{asset('packages/admin/iCheck/icheck.min.js')}}"></script>
 
 <script src="{{asset('packages/admin/layer/layer.js')}}"></script>
-<script src="{{asset('packages/admin/bootstrap-validator/js/validator.min.js')}}"></script>
+<script src="{{asset('packages/admin/bootstrap-validator/validator.min.js')}}"></script>
 <script>
   $(function () {
     $('input').iCheck({
