@@ -100,15 +100,48 @@ desired effect
     });
 </script>
 <script src="{{asset('packages/admin/layer/layer.js')}}"></script>
-<script src="{{asset('packages/admin/bootstrap-validator/js/validator.min.js')}}"></script>
+<script src="{{asset('packages/admin/bootstrap-validator/validator.min.js')}}"></script>
 <script src="{{asset('packages/admin/select2/js/select2.min.js')}}"></script>
 <script src="{{asset('packages/admin/nestable/js/jquery.nestable.js')}}"></script>
 <script src="{{asset('packages/admin/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/bootstrap-table.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')}}"></script>
-<script src="{{asset('packages/admin/tableExport.jquery.plugin/js/tableExport.min.js')}}"></script>
+<script src="{{asset('packages/admin/tableExport.jquery.plugin/tableExport.min.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/extensions/export/bootstrap-table-export.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js')}}"></script>
+<script src="{{asset('packages/admin/jquery-cookie/jquery.cookie.js')}}"></script>
+<script>
+    var cookie = $.cookie('sidebar');
+    //console.log(cookie);
+    if (cookie == 0) {
+        $('body').addClass('sidebar-collapse');
+        //console.log('添加闭合样式');
+    }
+    $(".sidebar-toggle").click(function() {
+        //console.log($("body").attr('class'));
+        var flag = getFlag();
+        if (flag == 0) {
+            $.cookie('sidebar', '0', {path: '/'});
+            //console.log('写入闭合cookie');
+        } else if (flag == 1) {
+            $.cookie('sidebar', '1', {path: '/'});
+            //console.log('写入展开cookie');
+        }
+    });
+    function getFlag() {
+        var str = $("body").attr('class');
+        var strs = new Array();
+        strs = str.split(" "); //字符分割 
+        //console.log(strs);
+        var flag = 0;//0是闭合状态
+        for (var i = 0; i < strs.length; i++) {
+            if (strs[i] == 'sidebar-collapse') {
+                flag = 1;//将要变成展开状态
+            }
+        }
+        return flag;
+    }
+</script>
 @yield('otherjs')
 </body>
 </html>
