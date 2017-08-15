@@ -33,6 +33,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" href="{{asset('packages/admin/nestable/css/jquery.nestable.css')}}">
   <link rel="stylesheet" href="{{asset('packages/admin/fontawesome-iconpicker/css/fontawesome-iconpicker.min.css')}}">
   <link rel="stylesheet" href="{{asset('packages/admin/bootstrap-table/bootstrap-table.min.css')}}">
+  <style>
+    .select2-container--default .select2-selection--multiple .select2-selection__choice{
+        background-color: #3c8dbc
+    }
+    </style>
   @yield('othercss')
   <!-- Google Font -->
 <!--  <link rel="stylesheet"
@@ -101,7 +106,7 @@ desired effect
 </script>
 <script src="{{asset('packages/admin/layer/layer.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-validator/validator.min.js')}}"></script>
-<script src="{{asset('packages/admin/select2/js/select2.min.js')}}"></script>
+<script src="{{asset('packages/admin/select2/js/select2.full.min.js')}}"></script>
 <script src="{{asset('packages/admin/nestable/js/jquery.nestable.js')}}"></script>
 <script src="{{asset('packages/admin/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/bootstrap-table.js')}}"></script>
