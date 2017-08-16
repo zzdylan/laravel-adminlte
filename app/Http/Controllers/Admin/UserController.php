@@ -140,6 +140,9 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
+        if ($id == 1 && Auth::guard('admin')->user()->id != 1) {
+            ['status' => 0, 'msg' => '无权访问!'];
+        }
         $rule = [
             'username' => 'required',
             'name' => 'required',

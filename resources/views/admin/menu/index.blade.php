@@ -33,10 +33,10 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">父级菜单</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <select name="parent_id" class="form-control" required>
-                                    <option value="0">顶级菜单</option>
-                                    @include('admin.menu.menuSelect',['menus'=>$menus,'sign'=>'&nbsp;&nbsp;&nbsp;&nbsp;'])
+                                <option value="0">顶级菜单</option>
+                                @include('admin.menu.menuSelect',['menus'=>$menus,'sign'=>'&nbsp;&nbsp;&nbsp;&nbsp;'])
                             </select>
                             <div class="help-block with-errors"></div>
                         </div>
@@ -44,56 +44,59 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">标题</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <div class="help-block with-errors"></div>
                             <div class="input-group">
-                                    <span class="input-group-addon">
-                                            <i class="fa fa-pencil"></i>
-                                    </span>
-                                    <input name="title" value="" type="text" class="form-control" placeholder="输入标题" required>
+                                <span class="input-group-addon">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <input name="title" value="" type="text" class="form-control" placeholder="输入标题" required>
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">图标</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <div class="help-block with-errors"></div>
                             <div class="input-group">
-                                    <input name="icon" value="" style="height: 34px" class="icon" type="text" class="form-control" placeholder="" required> 
+                                <input name="icon" style="height: 34px" value="" class="icon" type="text" class="form-control" placeholder="" required> 
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">路径</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <div class="help-block with-errors"></div>
                             <div class="input-group">
-                                    <span class="input-group-addon">
-                                            <i class="fa fa-pencil"></i>
-                                    </span>
-                                    <input name="uri" value="" type="text" class="form-control" placeholder="输入路径" required> 
+                                <span class="input-group-addon">
+                                    <i class="fa fa-pencil"></i>
+                                </span>
+                                <input name="uri" value="" type="text" class="form-control" placeholder="输入路径" required> 
                             </div>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">角色</label>
 
-                        <div class="col-sm-10">
+                        <div class="col-sm-8">
                             <div class="help-block with-errors"></div>
                             <select id="roles" name="roles[]" class="form-control" multiple>
-                                    @foreach($roles as $role)
-                                    <option value="{{$role->id}}">{{$role->name}}</option>
-                                    @endforeach
+                                @foreach($roles as $role)
+                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button  type="reset" class="btn btn-default">取消</button>
-                    <button id="add_button" type="submit" class="btn btn-info pull-right">提交</button>
+                    <div class="col-md-2"></div>
+                    <div class="btn-group col-md-8">
+                        <button type="reset" class="btn btn-warning pull-left">撤销</button>
+                        <button type="submit" class="btn btn-info pull-right">提交</button>
+                    </div>
                 </div>
                 <!-- /.box-footer -->
             </form>
