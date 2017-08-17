@@ -3,7 +3,7 @@
 密码123456
 
 
-本地安装：
+本地安装：<br>
 1、composer update   安装项目依赖<br>
 2、cp .env.example .env  复制.env.example并且更名为.env<br>
 3、在.env中配置好数据库<br>
