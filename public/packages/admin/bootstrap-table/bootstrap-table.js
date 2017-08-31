@@ -1180,20 +1180,20 @@
 
             this.$toolbar.append(html.join(''));
             $search = this.$toolbar.find('.search input');
-            $search.off('keyup drop blur').on('keyup drop blur', function (event) {
-                if (that.options.searchOnEnterKey && event.keyCode !== 13) {
-                    return;
-                }
-
-                if ($.inArray(event.keyCode, [37, 38, 39, 40]) > -1) {
-                    return;
-                }
-
-                clearTimeout(timeoutId); // doesn't matter if it's 0
-                timeoutId = setTimeout(function () {
-                    that.onSearch(event);
-                }, that.options.searchTimeOut);
-            });
+//            $search.off('keyup drop blur').on('keyup drop blur', function (event) {
+//                if (that.options.searchOnEnterKey && event.keyCode !== 13) {
+//                    return;
+//                }
+//
+//                if ($.inArray(event.keyCode, [37, 38, 39, 40]) > -1) {
+//                    return;
+//                }
+//
+//                clearTimeout(timeoutId); // doesn't matter if it's 0
+//                timeoutId = setTimeout(function () {
+//                    that.onSearch(event);
+//                }, that.options.searchTimeOut);
+//            });
 
             if (isIEBrowser()) {
                 $search.off('mouseup').on('mouseup', function (event) {

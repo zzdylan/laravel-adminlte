@@ -111,7 +111,7 @@ desired effect
 <script src="{{asset('packages/admin/fontawesome-iconpicker/js/fontawesome-iconpicker.min.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/bootstrap-table.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/locale/bootstrap-table-zh-CN.min.js')}}"></script>
-<script src="{{asset('packages/admin/tableExport.jquery.plugin/tableExport.min.js')}}"></script>
+<script src="{{asset('packages/admin/tableExport.jquery.plugin/tableExport.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/extensions/export/bootstrap-table-export.js')}}"></script>
 <script src="{{asset('packages/admin/bootstrap-table/extensions/toolbar/bootstrap-table-toolbar.js')}}"></script>
 <script src="{{asset('packages/admin/jquery-cookie/jquery.cookie.js')}}"></script>
