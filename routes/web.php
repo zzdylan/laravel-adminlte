@@ -12,6 +12,7 @@
  */
 
 Route::get('/', function () {
+    dd(Illuminate\Support\Facades\Cache::get('menus'));
     return view('welcome');
 });
 for($i=0;$i<50;$i++){

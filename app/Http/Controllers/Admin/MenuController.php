@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use DB;
+use Illuminate\Support\Facades\Cache;
 
 class MenuController extends Controller {
 
@@ -17,7 +18,7 @@ class MenuController extends Controller {
     public function index() {
         $menuModel = config('admin.database.menu_model');
         $roleModel = config('admin.database.roles_model');
-        $menus = getTree($menuModel::orderBy('order')->get()->toArray());
+        $menus = getTree($menuModel::menuCache());
         $roles = $roleModel::all();
         return view('admin.menu.index', [
             'menus' => $menus,
@@ -59,6 +60,7 @@ class MenuController extends Controller {
         } catch (\Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];
         }
+        Cache::forget('menus');
         return ['status' => 1, 'msg' => '添加成功!'];
     }
 
@@ -123,7 +125,7 @@ class MenuController extends Controller {
         } catch (\Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];
         }
-
+        Cache::forget('menus');
         return ['status' => 1, 'msg' => '更新成功!'];
     }
 
@@ -136,6 +138,7 @@ class MenuController extends Controller {
     public function destroy($id) {
         $menuModel = config('admin.database.menu_model');
         $menuModel::destroy($id);
+        Cache::forget('menus');
         return ['status' => 1, 'msg' => '删除成功'];
     }
 

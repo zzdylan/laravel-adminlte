@@ -8,7 +8,7 @@
                 <a href="javascript:void(0);" data-id="{{$menu['id']}}" class="menu_delete"><i class="fa fa-trash"></i></a>
             </span>
         </div>
-        @if(isset($menu['childrens']))
+        @if($menu['childrens'])
         @include('admin.menu.nestablePart',['menus'=>$menu['childrens']])
         @endif
     </li>

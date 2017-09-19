@@ -33,7 +33,7 @@
                 @php
                     $menuModel = config('admin.database.menu_model');
                 @endphp
-                @include('admin.layouts.menuPart',['menus'=>getTree($menuModel::with('roles')->orderBy('order')->get()->toArray())])
+                @include('admin.layouts.menuPart',['menus'=>getTree($menuModel::menuCache())])
         </ul>
         <!-- /.sidebar-menu -->
     </section>

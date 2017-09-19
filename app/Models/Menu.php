@@ -3,19 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Menu extends Model {
 
     protected $guarded = [];
     protected $table = 'admin_menu';
-
-    public function hasChildren() {
-        return self::where('parent_id', $this->id)->exists();
-    }
-
-    public function childrens() {
-        return self::where('parent_id', $this->id)->orderBy('order')->get();
-    }
 
     public function roles() {
         return $this->belongsToMany(config('admin.database.roles_model'), config('admin.database.role_menu_table'), 'menu_id', 'role_id');
@@ -34,32 +27,52 @@ class Menu extends Model {
         return true;
     }
 
-    public static function allChildrenIds($id, &$allChildrenIds = []) {
-        $menuIds = self::where('parent_id', $id)->pluck('id')->toArray();
-        if (!empty($menuIds)) {
-            $allChildrenIds = array_merge($menuIds, $allChildrenIds);
-            foreach ($menuIds as $menuId) {
-                self::allChildrenIds($menuId, $allChildrenIds);
+    public static function allChildrenUrls($id, $menus = null) {
+        $childrensUrls = [];
+        if ($menus == null) {
+            $menus = self::menuCache();
+        }
+        foreach ($menus as $menu) {
+            if ($menu['parent_id'] == $id) {
+                $childrensUrls = self::allChildrenUrls($menu['id'], $menus);
+                $childrensUrls[] = $menu['uri'];
             }
         }
-        return $allChildrenIds;
+        return $childrensUrls;
     }
 
-    public static function allChildrenUrls($id, &$allChildrenUrls = []) {
-        $menus = self::where('parent_id', $id);
-        $menuIds = $menus->pluck('id')->toArray();
-        if (!empty($menuIds)) {
-            $menuUris = $menus->pluck('uri')->toArray();
-            foreach ($menuUris as $key => $menuUri) {
-                $menuUris[$key] = config('admin.prefix') . '/' . $menuUri;
-            }
-            $menuUrls = array_map('url', $menuUris);
-            $allChildrenUrls = array_merge($menuUrls, $allChildrenUrls);
-            foreach ($menuIds as $menuId) {
-                self::allChildrenIds($menuId, $allChildrenUrls);
+    public static function allChildrenIds($id, $menus = null) {
+        $childrensIds = [];
+        if ($menus == null) {
+            $menus = self::menuCache();
+        }
+        foreach ($menus as $menu) {
+            if ($menu['parent_id'] == $id) {
+                $childrensIds = self::allChildrenIds($menu['id'], $menus);
+                $childrensIds[] = $menu['id'];
             }
         }
-        return $allChildrenUrls;
+        return $childrensIds;
+    }
+    
+    public static function allChildrens($id, $menus = null) {
+        $childrens = [];
+        if ($menus == null) {
+            $menus = self::menuCache();
+        }
+        foreach ($menus as $menu) {
+            if ($menu['parent_id'] == $id) {
+                $childrens = self::allChildrenUrls($menu['id'], $menus);
+                $childrens[] = $menu;
+            }
+        }
+        return $childrens;
+    }
+
+    public static function menuCache() {
+        return Cache::rememberForever('menus', function() {
+                    return self::with('roles')->orderBy('order')->get()->toArray();
+                });
     }
 
 }

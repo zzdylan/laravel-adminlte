@@ -17,7 +17,13 @@ function admin_toastr($type, $message) {
  */
 function is_active($menu_id) {
     $menuModel = config('admin.database.menu_model');
-    $currentUrl = url(config('admin.prefix').'/'.$menuModel::find($menu_id)->uri);
+    $allMenu = $menuModel::menuCache();
+    foreach($allMenu as $menu){
+        if($menu['id'] == $menu_id){
+            $currentUrl = url(config('admin.prefix') . '/' . $menu['uri']);
+            continue;
+        }
+    }
     $allChildrenUrls = $menuModel::allChildrenUrls($menu_id);
     if (in_array(Request::url(), $allChildrenUrls) || Request::url() == $currentUrl) {
         return 'active';
@@ -32,20 +38,17 @@ function is_active($menu_id) {
  * @return view
  */
 function jump($message, $jumpUrl = '/admin', $type = 'error') {
-	return view('jump', ['type' => $type, 'jumpUrl' => $jumpUrl, 'message' => $message]);
+    return view('jump', ['type' => $type, 'jumpUrl' => $jumpUrl, 'message' => $message]);
 }
 
 //递归获取分类树
-function getTree($items,$pid ="parent_id") {
-    $map  = [];
-    $tree = [];    
-    foreach ($items as &$it){ $map[$it['id']] = &$it; }  //数据的ID名生成新的引用索引树
-    foreach ($items as &$it){
-        $parent = &$map[$it[$pid]];
-        if($parent) {
-            $parent['childrens'][] = &$it;
-        }else{
-            $tree[] = &$it;
+function getTree($items, $pid = 0) {
+    $tree = [];
+    foreach ($items as $item) {
+        if ($item['parent_id'] == $pid) {
+            $item['childrens'] = getTree($items, $item['id']);
+            $tree[] = $item;
+            unset($item);
         }
     }
     return $tree;
