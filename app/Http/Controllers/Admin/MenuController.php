@@ -17,7 +17,7 @@ class MenuController extends Controller {
     public function index() {
         $menuModel = config('admin.database.menu_model');
         $roleModel = config('admin.database.roles_model');
-        $menus = $menuModel::where('parent_id', 0)->orderBy('order')->get();
+        $menus = getTree($menuModel::orderBy('order')->get()->toArray());
         $roles = $roleModel::all();
         return view('admin.menu.index', [
             'menus' => $menus,

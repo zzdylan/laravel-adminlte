@@ -40,7 +40,7 @@ class Admin extends Authenticatable {
     }
 
     public function visible($menuRoles) {
-        if ($menuRoles->isEmpty()) {
+        if (empty($menuRoles)) {
             return true;
         }
         if (!is_array($menuRoles)) {

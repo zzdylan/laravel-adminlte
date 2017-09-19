@@ -34,3 +34,19 @@ function is_active($menu_id) {
 function jump($message, $jumpUrl = '/admin', $type = 'error') {
 	return view('jump', ['type' => $type, 'jumpUrl' => $jumpUrl, 'message' => $message]);
 }
+
+//递归获取分类树
+function getTree($items,$pid ="parent_id") {
+    $map  = [];
+    $tree = [];    
+    foreach ($items as &$it){ $map[$it['id']] = &$it; }  //数据的ID名生成新的引用索引树
+    foreach ($items as &$it){
+        $parent = &$map[$it[$pid]];
+        if($parent) {
+            $parent['childrens'][] = &$it;
+        }else{
+            $tree[] = &$it;
+        }
+    }
+    return $tree;
+}
