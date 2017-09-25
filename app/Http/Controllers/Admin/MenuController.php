@@ -153,6 +153,7 @@ class MenuController extends Controller {
         } catch (\Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];
         }
+        Cache::forget('menus');
         return ['status' => 1, 'msg' => '更新成功'];
     }
 

@@ -9,7 +9,9 @@
         @endif
     </a>
     @if($menu['childrens'])
+    <ul class="treeview-menu">
     @include('admin.layouts.menuPart',['menus'=>$menu['childrens']])
+    </ul>
     @endif
 </li>
 @endif

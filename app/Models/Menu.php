@@ -62,7 +62,7 @@ class Menu extends Model {
         }
         foreach ($menus as $menu) {
             if ($menu['parent_id'] == $id) {
-                $childrens = self::allChildrenUrls($menu['id'], $menus);
+                $childrens = self::allChildrens($menu['id'], $menus);
                 $childrens[] = $menu;
             }
         }

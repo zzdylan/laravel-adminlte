@@ -12,9 +12,17 @@
  */
 
 Route::get('/', function () {
-    dd(Illuminate\Support\Facades\Cache::get('menus'));
     return view('welcome');
 });
+Route::get('/clear', function () {
+    dd(Cache::forget('menus'));
+    return view('welcome');
+});
+Route::get('/get', function () {
+    dd(App\Models\Menu::menuCache());
+    return view('welcome');
+});
+
 for($i=0;$i<50;$i++){
     Route::get('/admin/test'.$i,function(){
         return view('test');
