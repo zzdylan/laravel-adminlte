@@ -4,7 +4,7 @@
     <div class="box-body">
         <div id="toolbar">
             @if(Auth::guard('admin')->user()->checkPermission('user.create')) <a href="{{asset(config('admin.prefix').'/user/create')}}" class="btn btn-success">新增</a> @endif
-            @if(Auth::guard('admin')->user()->checkPermission('user.delete')) <a class="btn btn-danger remove">删除</a> @endif
+            @if(Auth::guard('admin')->user()->checkPermission('user.delete')) <a disabled class="btn btn-danger remove">删除</a> @endif
         </div>
         <table id="table"></table>
     </div>
