@@ -4,7 +4,7 @@
     <div class="box-body">
         <div id="toolbar">
             @if(Auth::guard('admin')->user()->checkPermission('role.create')) <a href="{{asset(config('admin.prefix').'/role/create')}}" class="btn btn-success">新增</a> @endif
-            @if(Auth::guard('admin')->user()->checkPermission('role.delete')) <a class="btn btn-danger remove">删除</a> @endif
+            @if(Auth::guard('admin')->user()->checkPermission('role.delete')) <button disabled class="btn btn-danger remove">删除</button> @endif
         </div>
         <table id="table"></table>
     </div>
@@ -74,6 +74,15 @@
             });
         }
     };
+
+    $table.on('check.bs.table uncheck.bs.table ' +
+        'check-all.bs.table uncheck-all.bs.table', function () {
+            $(".remove").prop('disabled', !$table.bootstrapTable('getSelections').length);
+
+            // save your data, here just save the current page
+            selections = getSelectionIds();
+            // push or splice the selections if you want to save all data selections
+        });
 
     $table.bootstrapTable({
         url: "{{asset(config('admin.prefix').'/role')}}",
