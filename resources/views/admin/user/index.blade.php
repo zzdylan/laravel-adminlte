@@ -110,5 +110,13 @@
             }
         ]
     });
+        $table.on('check.bs.table uncheck.bs.table ' +
+            'check-all.bs.table uncheck-all.bs.table', function () {
+                $(".remove").prop('disabled', !$table.bootstrapTable('getSelections').length);
+
+                // save your data, here just save the current page
+                selections = getSelectionIds();
+                // push or splice the selections if you want to save all data selections
+            });
 </script>
 @endsection
