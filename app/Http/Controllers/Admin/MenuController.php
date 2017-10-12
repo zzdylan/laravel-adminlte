@@ -73,7 +73,7 @@ class MenuController extends Controller {
     public function edit($id) {
         $menuModel = config('admin.database.menu_model');
         $roleModel = config('admin.database.roles_model');
-        $menus = $menuModel::where('parent_id', 0)->orderBy('order')->get();
+        $menus = getTree($menuModel::menuCache());
         $roles = $roleModel::all();
         $menu = $menuModel::find($id);
         return view('admin.menu.edit', [

@@ -27,6 +27,7 @@ class Menu extends Model {
         return true;
     }
 
+    //所有子类url
     public static function allChildrenUrls($id, $menus = null) {
         $childrensUrls = [];
         if ($menus == null) {
@@ -34,8 +35,11 @@ class Menu extends Model {
         }
         foreach ($menus as $menu) {
             if ($menu['parent_id'] == $id) {
-                $childrensUrls = self::allChildrenUrls($menu['id'], $menus);
-                $childrensUrls[] = $menu['uri'];
+                $childrensUrls = array_merge($childrensUrls, self::allChildrenUrls($menu['id'], $menus));
+                $childrensUrls[] = url(config('admin.prefix') . '/' . $menu['uri']);
+            }
+            if ($menu['id'] == $id) {
+                $childrensUrls[] = url(config('admin.prefix') . '/' . $menu['uri']);
             }
         }
         return $childrensUrls;
@@ -48,13 +52,13 @@ class Menu extends Model {
         }
         foreach ($menus as $menu) {
             if ($menu['parent_id'] == $id) {
-                $childrensIds = self::allChildrenIds($menu['id'], $menus);
+                $childrensIds = array_merge($childrensIds, self::allChildrenIds($menu['id'], $menus));
                 $childrensIds[] = $menu['id'];
             }
         }
         return $childrensIds;
     }
-    
+
     public static function allChildrens($id, $menus = null) {
         $childrens = [];
         if ($menus == null) {
@@ -62,7 +66,7 @@ class Menu extends Model {
         }
         foreach ($menus as $menu) {
             if ($menu['parent_id'] == $id) {
-                $childrens = self::allChildrens($menu['id'], $menus);
+                $childrens = array_merge($childrens, self::allChildrens($menu['id'], $menus));
                 $childrens[] = $menu;
             }
         }

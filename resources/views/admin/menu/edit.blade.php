@@ -24,11 +24,11 @@
                         <option value="0">顶级菜单</option>
                         @php
                         $data = [
-                        'menus'=>$menus,
-                        'sign'=>'&nbsp;&nbsp;&nbsp;&nbsp;'
+                            'menus'=>$menus,
+                            'sign'=>'&nbsp;&nbsp;&nbsp;&nbsp;'
                         ];
                         if(isset($targetMenu)){
-                        $data['targetMenu'] = $targetMenu;
+                            $data['targetMenu'] = $targetMenu;
                         }
                         @endphp
                         @include('admin.menu.menuSelect',$data)

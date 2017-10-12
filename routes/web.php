@@ -14,12 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/clear', function () {
-    dd(Cache::forget('menus'));
-    return view('welcome');
-});
-Route::get('/get', function () {
-    dd(App\Models\Menu::menuCache());
+Route::get('/test', function () {
     return view('welcome');
 });
 
