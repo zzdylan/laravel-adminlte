@@ -29,7 +29,7 @@ class Admin extends Authenticatable {
     }
 
     public function checkPermission($slug) {
-        if ($this->id==1 || $this->isSuperAdmin() || in_array($slug, $this->allPermissions())) {
+        if ($this->isSuperAdmin() || in_array($slug, $this->allPermissions())) {
             return true;
         }
         return false;
