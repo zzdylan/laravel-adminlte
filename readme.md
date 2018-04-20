@@ -1,12 +1,73 @@
-<a target="_blank" href="http://111.231.118.189:8888/admin">在线演示</a>
-账号admin
-密码123456
+## 项目概述
+
+* 项目名称：laravel-adminlte
+* 演示地址：http://111.231.118.189:8888/admin
+  演示账号/密码：admin/123456
+
+laravel-adminlte是一个简洁的后台管理系统基础框架
+
+## 功能如下
+- 菜单管理
+- 后台用户管理
+- 角色管理
+- 权限管理
+
+## 运行环境要求
+
+- Nginx 1.8+
+- PHP 5.6+
+- Mysql 5.7+
+
+## 开发环境部署/安装
+
+本项目代码使用php框架laravel5.4开发
+
+### 基础安装
+
+#### 1. 克隆源代码
+
+克隆 `laravel-adminlte` 源代码到本地：
+
+    > git clone https://github.com/zzDylan/laravel-adminlte
 
 
-本地安装：<br>
-1、composer update   安装项目依赖<br>
-2、cp .env.example .env  复制.env.example并且更名为.env<br>
-3、在.env中配置好数据库<br>
-4、执行迁移命令:php artisan migrate<br>
-5、执行数据填充命令:php artisan db:seed<br>
-初始账号为admin 密码为123456<br>
+#### 2. 安装扩展包依赖
+
+	composer update
+
+#### 3. 生成配置文件
+
+```
+cp .env.example .env
+```
+
+你可以根据情况修改 `.env` 文件里的内容，如数据库连接、缓存、邮件设置等：
+
+```
+APP_URL=http://localhost
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=laravel-adminlte
+DB_USERNAME=root
+DB_PASSWORD=123456
+```
+
+#### 4. 生成数据表及生成测试数据
+
+在网站根目录下运行以下命令
+
+```shell
+$ php artisan migrate
+```
+
+初始的表已使用数据迁移生成
+
+
+#### 5. 生成秘钥
+
+```shell
+php artisan key:generate
+```
+
