@@ -1,4 +1,4 @@
-<a target="_blank" href="http://adminlte.51godream.com/admin">在线演示</a>
+<a target="_blank" href="http://111.231.118.189:8888/admin">在线演示</a>
 账号admin
 密码123456
 
