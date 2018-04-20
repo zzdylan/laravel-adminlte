@@ -100,7 +100,7 @@
         if (!e.isDefaultPrevented()) {
             layer.load(1, {shade: [0.1, '#fff']});
             $.ajax({
-                url: "{{asset(config('admin.prefix').'/menu').'/'.$targetMenu->id}}",
+                url: "{{asset(config('admin.prefix').'/auth/menu').'/'.$targetMenu->id}}",
                 type: 'put',
                 dataType: "json",
                 data: $("#editForm").serialize(),
@@ -108,7 +108,7 @@
                     layer.closeAll();
                     if (res.status == 1) {
                         layer.msg(res.msg, {icon: 1});
-                        location.href = "{{asset(config('admin.prefix')).'/menu'}}";
+                        location.href = "{{asset(config('admin.prefix')).'/auth/menu'}}";
                     } else {
                         layer.msg(res.msg, {icon: 5});
                     }

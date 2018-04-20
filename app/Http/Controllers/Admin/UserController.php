@@ -38,9 +38,6 @@ class UserController extends Controller {
                 $userData[$key]['id'] = $user->id;
                 $userData[$key]['username'] = $user->username;
                 $userData[$key]['roles'] = $user->roles->pluck('name')->toArray();
-                if($user->id == 1){
-                    $userData[$key]['roles'][] = '顶级管理员';
-                }
                 $userData[$key]['created_at'] = (string) $user->created_at;
                 $userData[$key]['updated_at'] = (string) $user->updated_at;
             }
@@ -120,7 +117,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit($id) {
-        if ($id == 1 && Auth::guard('admin')->user()->id != 1) {
+        if (!Auth::guard('admin')->user()->isSuperAdmin()) {
             return jump('无权访问');
         }
         $adminModel = config('admin.database.users_model');
@@ -140,8 +137,8 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id) {
-        if ($id == 1 && Auth::guard('admin')->user()->id != 1) {
-            ['status' => 0, 'msg' => '无权访问!'];
+        if (!Auth::guard('admin')->user()->isSuperAdmin()) {
+            return ['status' => 0, 'msg' => '无权访问!'];
         }
         $rule = [
             'username' => 'required',
@@ -190,14 +187,17 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        if($id==1){
-            return ['status'=>0,'msg'=>'无法删除顶级管理员'];
-        }
-        if($id==Auth::guard('admin')->user()->id){
-            return ['status'=>0,'msg'=>'无法删除自己'];
-        }
         $userModel = config('admin.database.users_model');
+        $roleModel = config('admin.database.roles_model');
+        $admin = $userModel::find($id);
+        //超级管理员可以删除超级管理员，但是只有最后一个超级管理员的时候则不能删除
+        if ($admin->isSuperAdmin() && $roleModel::where('slug', 'super_admin')->first()->admins()->count() == 1) {
+            return ['status' => 0, 'msg' => '该超级管理员是最后一位超级管理员，无法删除'];
+        }
         $userModel::destroy($id);
+        //删除该用户的角色关联和权限关联
+        DB::table(config('admin.database.role_users_table'))->where('user_id',$id)->delete();
+        DB::table(config('admin.database.user_permissions_table'))->where('user_id', $id)->delete();
         return ['status' => 1, 'msg' => '删除成功!'];
     }
 
@@ -210,11 +210,11 @@ class UserController extends Controller {
             'ids' => 'required|array',
         ];
         $input = $request->all();
-        if(in_array(1,$input['ids'])){
-            return ['status'=>0,'msg'=>'无法删除顶级管理员'];
+        if (in_array(1, $input['ids'])) {
+            return ['status' => 0, 'msg' => '无法删除顶级管理员'];
         }
-        if(in_array(Auth::guard('admin')->user()->id,$input['ids'])){
-            return ['status'=>0,'msg'=>'无法删除自己'];
+        if (in_array(Auth::guard('admin')->user()->id, $input['ids'])) {
+            return ['status' => 0, 'msg' => '无法删除自己'];
         }
         Validator::make($input, $rule)->validate();
         $userModel = config('admin.database.users_model');

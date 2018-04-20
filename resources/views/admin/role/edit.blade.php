@@ -65,7 +65,7 @@
         if (!e.isDefaultPrevented()) {
             layer.load(1, {shade: [0.1, '#fff']});
             $.ajax({
-                    url: "{{asset(config('admin.prefix').'/role')}}" + '/' + {{$role-> id}},
+                    url: "{{url(config('admin.prefix').'/auth/role')}}" + '/' + {{$role-> id}},
                     type: 'put',
                     dataType: "json",
                     data: $("#editForm").serialize(),
@@ -73,7 +73,7 @@
                         layer.closeAll();
                         if (res.status == 1) {
                             layer.msg(res.msg, {icon: 1});
-                            location.href = "{{asset(config('admin.prefix')).'/role'}}";
+                            location.href = "{{url(config('admin.prefix')).'/auth/role'}}";
                         } else {
                             layer.msg(res.msg, {icon: 5});
                         }

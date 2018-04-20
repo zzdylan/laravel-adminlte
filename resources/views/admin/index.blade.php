@@ -13,7 +13,7 @@
                 </tr>
                 <tr>
                     <td>laravel版本</td>
-                    <td>5.4.32</td>
+                    <td>{{app()->version()}}</td>
                 </tr>
                 <tr>
                     <td>服务器操作系统</td>

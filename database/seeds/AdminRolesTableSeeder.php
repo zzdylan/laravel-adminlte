@@ -23,14 +23,6 @@ class AdminRolesTableSeeder extends Seeder
                 'name' => '超级管理员',
                 'slug' => 'super_admin',
                 'created_at' => NULL,
-                'updated_at' => '2017-08-11 13:48:25',
-            ),
-            1 => 
-            array (
-                'id' => 2,
-                'name' => '普通管理员',
-                'slug' => 'admin',
-                'created_at' => NULL,
                 'updated_at' => NULL,
             )
         ));

@@ -13,7 +13,7 @@ class Role extends Model {
         return $this->belongsToMany(config('admin.database.permissions_model'), config('admin.database.role_permissions_table'), 'role_id', 'permission_id');
     }
 
-    public function Admins() {
+    public function admins() {
         return $this->belongsToMany(config('admin.database.users_model'), config('admin.database.role_users_table'), 'role_id', 'user_id');
     }
 

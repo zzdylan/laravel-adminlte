@@ -40,7 +40,7 @@ class Admin extends Authenticatable {
     }
 
     public function visible($menuRoles) {
-        if($this->id == 1){
+        if($this->isSuperAdmin()){
             return true;
         }
         if (empty($menuRoles)) {
@@ -59,9 +59,6 @@ class Admin extends Authenticatable {
     }
 
     public function isSuperAdmin() {
-        if($this->id == 1){
-            return true;
-        }
         $roles = $this->roles->toArray();
         $slugs = array_column($roles, 'slug');
         if (in_array('super_admin', $slugs)) {
@@ -69,5 +66,5 @@ class Admin extends Authenticatable {
         }
         return false;
     }
-
+    
 }

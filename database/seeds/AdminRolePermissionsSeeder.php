@@ -2,16 +2,15 @@
 
 use Illuminate\Database\Seeder;
 
-class AdminPermissionsTableSeeder extends Seeder
+class AdminRolePermissionsSeeder extends Seeder
 {
-
     /**
-     * Auto generated seed file
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        
+        //
     }
 }

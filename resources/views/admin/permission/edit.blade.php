@@ -5,7 +5,7 @@
         <h3 class="box-title">编辑</h3>
         <div class="box-tools">
             <div class="btn-group pull-right" style="margin-right: 10px">
-                <a href="{{url(config('admin.prefix').'/permission')}}" class="btn btn-sm btn-default"><i class="fa fa-list"></i>&nbsp;列表</a>
+                <a href="{{url(config('admin.prefix').'/auth/permission')}}" class="btn btn-sm btn-default"><i class="fa fa-list"></i>&nbsp;列表</a>
             </div> 
             <div class="btn-group pull-right" style="margin-right: 10px">
                 <a onclick="history.back(1)" class="btn btn-sm btn-default"><i class="fa fa-arrow-left"></i>&nbsp;返回</a>
@@ -58,7 +58,7 @@
         if (!e.isDefaultPrevented()) {
         layer.load(1, {shade: [0.1, '#fff']});
             $.ajax({
-                    url: "{{asset(config('admin.prefix').'/permission')}}" + '/' + {{$permission->id}},
+                    url: "{{url(config('admin.prefix').'/auth/permission')}}" + '/' + {{$permission->id}},
                     type: 'put',
                     dataType: "json",
                     data: $("#editForm").serialize(),
@@ -66,7 +66,7 @@
                         layer.closeAll();
                             if (res.status == 1) {
                             layer.msg(res.msg, {icon: 1});
-                            location.href = "{{asset(config('admin.prefix')).'/permission'}}";
+                            location.href = "{{url(config('admin.prefix')).'/auth/permission'}}";
                         } else {
                             layer.msg(res.msg, {icon: 5});
                         }

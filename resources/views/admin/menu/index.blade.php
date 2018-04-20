@@ -27,7 +27,7 @@
             </div>
             <!-- /.box-header -->
             <!-- form start -->
-            <form id="addForm" method="post" action="/admin/menu" class="form-horizontal">
+            <form id="addForm" method="post" action="{{url(config('admin.prefix'))}}/auth/admin/menu" class="form-horizontal">
                 <div class="box-body">
                     {{ csrf_field() }}
                     <div class="form-group">
@@ -116,13 +116,13 @@
     $('#save').click(function () {
         var nestable = $('.dd').nestable('serialize');
         layer.load(1, {shade: [0.1, '#fff']});
-        $.post('/admin/menu/nestable', {"nestable": nestable}, function (res) {
+        $.post("{{url(config('admin.prefix').'/auth/menu/nestable')}}", {"nestable": nestable}, function (res) {
             layer.closeAll();
             if (res.status == 0) {
                 layer.msg(res.msg, {icon: 5});
             } else {
                 layer.msg(res.msg, {icon: 1});
-                location.href = "{{url(config('admin.prefix').'/menu')}}";
+                location.href = "{{url(config('admin.prefix').'/auth/menu')}}";
             }
         });
     });
@@ -143,7 +143,7 @@
         layer.confirm('确认删除?', {btn: ['是', '否']}, function () {
             layer.load(1, {shade: [0.1, '#fff']});
             $.ajax({
-                url: "{{asset(config('admin.prefix').'/menu')}}" + '/' + id,
+                url: "{{url(config('admin.prefix').'/auth/menu')}}" + '/' + id,
                 type: 'delete',
                 dataType: 'json',
                 success: function (res) {
@@ -161,11 +161,11 @@
     $('#addForm').validator().on('submit', function (e) {
         if (!e.isDefaultPrevented()) {
             layer.load(1, {shade: [0.1, '#fff']});
-            $.post("{{asset(config('admin.prefix')).'/menu'}}", $('#addForm').serialize(), function (res) {
+            $.post("{{asset(config('admin.prefix')).'/auth/menu'}}", $('#addForm').serialize(), function (res) {
                 layer.closeAll();
                 if (res.status == 1) {
                     layer.msg(res.msg, {icon: 1});
-                    location.href = "{{asset(config('admin.prefix')).'/menu'}}";
+                    location.href = "{{url(config('admin.prefix')).'/auth/menu'}}";
                 } else {
                     layer.msg(res.msg, {icon: 5});
                 }
