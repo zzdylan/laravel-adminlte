@@ -28,6 +28,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin'], function () {
 
     //权限相关的只有超级管理员可以访问
     Route::group(['prefix' => 'auth', 'middleware' => 'role:super_admin'], function() {
+        
+        //个人资料
+        Route::group(['prefix' => 'profile'], function() {
+            Route::get('edit','ProfileController@edit');
+            Route::put('edit','ProfileController@update');
+        });
         //菜单管理
         Route::group(['prefix' => 'menu'], function() {
             //菜单列表

@@ -34,13 +34,13 @@ class Admin extends Authenticatable {
         }
         return false;
     }
-    
+
     public function inRole($slug) {
         return $this->roles()->where('slug', $slug)->exists();
     }
 
     public function visible($menuRoles) {
-        if($this->isSuperAdmin()){
+        if ($this->isSuperAdmin()) {
             return true;
         }
         if (empty($menuRoles)) {
@@ -66,5 +66,18 @@ class Admin extends Authenticatable {
         }
         return false;
     }
-    
+
+    public function getAvatarAttribute($value) {
+        if (empty($value)) {
+            return asset('images/avatar.jpg');
+        }
+        $disk = config('admin.upload.disk');
+        if ($disk == 'qiniu') {
+            $disk = \Storage::disk('qiniu');
+            return $disk->url($value);
+        } else {
+            return asset($value);
+        }
+    }
+
 }

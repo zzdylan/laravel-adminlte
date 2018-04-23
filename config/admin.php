@@ -4,13 +4,11 @@ return [
     /*
      * Laravel-admin name.
      */
-    'name'  => 'Laravel-admin',
-    
+    'name' => 'Laravel-admin',
     /*
      * Laravel-admin url prefix.
      */
     'prefix' => 'admin',
-    
     /*
      * Laravel-admin database setting.
      */
@@ -32,28 +30,29 @@ return [
         'role_permissions_table' => 'admin_role_permissions',
         'role_menu_table' => 'admin_role_menu',
     ],
-    
     /*
-    |---------------------------------------------------------|
-    | SKINS         | skin-blue                               |
-    |               | skin-black                              |
-    |               | skin-purple                             |
-    |               | skin-yellow                             |
-    |               | skin-red                                |
-    |               | skin-green                              |
-    |---------------------------------------------------------|
+      |---------------------------------------------------------|
+      | SKINS         | skin-blue                               |
+      |               | skin-black                              |
+      |               | skin-purple                             |
+      |               | skin-yellow                             |
+      |               | skin-red                                |
+      |               | skin-green                              |
+      |---------------------------------------------------------|
      * skin-blue-light...
      */
-    'skin'    => 'skin-blue-light',
-    
-     /*
-    |---------------------------------------------------------|
-    |LAYOUT OPTIONS | fixed                                   |
-    |               | layout-boxed                            |
-    |               | layout-top-nav                          |
-    |               | sidebar-collapse                        |
-    |               | sidebar-mini                            |
-    |---------------------------------------------------------|
+    'skin' => 'skin-blue-light',
+    /*
+      |---------------------------------------------------------|
+      |LAYOUT OPTIONS | fixed                                   |
+      |               | layout-boxed                            |
+      |               | layout-top-nav                          |
+      |               | sidebar-collapse                        |
+      |               | sidebar-mini                            |
+      |---------------------------------------------------------|
      */
-    'layout'  => ['sidebar-mini'],
+    'layout' => ['sidebar-mini'],
+    'upload' => [
+        'disk' => 'qiniu',
+    ],
 ];
