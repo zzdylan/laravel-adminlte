@@ -78,7 +78,7 @@ class AdminMenuTableSeeder extends Seeder
                 'parent_id' => 0,
                 'order' => 6,
                 'title' => '主页',
-                'icon' => 'fa-angellist',
+                'icon' => 'fa-home',
                 'uri' => 'index',
                 'created_at' => '2017-08-11 11:43:53',
                 'updated_at' => '2017-08-14 21:35:16',
