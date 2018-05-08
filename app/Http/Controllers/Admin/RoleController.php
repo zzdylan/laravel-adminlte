@@ -73,6 +73,9 @@ class RoleController extends Controller {
         $input = $request->all();
         Validator::make($input, $rule)->validate();
         $roleModel = config('admin.database.roles_model');
+        if($roleModel::where('slug',$input['slug'])->exists()){
+            return ['status' => 0, 'msg' => '角色标识已经存在'];
+        }
         $rolePermissionsTable = config('admin.database.role_permissions_table');
         try {
             $role = $roleModel::create([
