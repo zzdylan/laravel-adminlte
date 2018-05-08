@@ -157,6 +157,10 @@ class RoleController extends Controller {
      */
     public function destroy($id) {
         $roleModel = config('admin.database.roles_model');
+        $role = $roleModel::find($id);
+        if($role->slug == 'super_admin'){
+            return ['status' => 0, 'msg' => '无法删除超级管理员角色'];
+        }
         $roleModel::destroy($id);
         return ['status' => 1, 'msg' => '删除成功!'];
     }
@@ -172,6 +176,10 @@ class RoleController extends Controller {
         $input = $request->all();
         Validator::make($input, $rule)->validate();
         $roleModel = config('admin.database.roles_model');
+        $slugs = $roleModel::whereIn('id',$input)->pluck('slug')->toArray();
+        if(in_array('super_admin',$slugs)){
+            return ['status' => 0, 'msg' => '无法删除超级管理员角色'];
+        }
         $roleModel::destroy($input['ids']);
         return ['status' => 1, 'msg' => '删除成功!'];
     }
