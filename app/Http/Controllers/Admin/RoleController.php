@@ -73,7 +73,7 @@ class RoleController extends Controller {
         $input = $request->all();
         Validator::make($input, $rule)->validate();
         $roleModel = config('admin.database.roles_model');
-        if($roleModel::where('slug',$input['slug'])->exists()){
+        if ($roleModel::where('slug', $input['slug'])->exists()) {
             return ['status' => 0, 'msg' => '角色标识已经存在'];
         }
         $rolePermissionsTable = config('admin.database.role_permissions_table');
@@ -130,6 +130,9 @@ class RoleController extends Controller {
         $input = $request->all();
         Validator::make($input, $rule)->validate();
         $roleModel = config('admin.database.roles_model');
+        if ($roleModel::where('id', '!=', $id)->where('slug', $input['slug'])->exists()) {
+            return ['status' => 0, 'msg' => '角色标识已经存在'];
+        }
         $rolePermissionsTable = config('admin.database.role_permissions_table');
         $role = $roleModel::find($id);
         try {
@@ -161,7 +164,7 @@ class RoleController extends Controller {
     public function destroy($id) {
         $roleModel = config('admin.database.roles_model');
         $role = $roleModel::find($id);
-        if($role->slug == 'super_admin'){
+        if ($role->slug == 'super_admin') {
             return ['status' => 0, 'msg' => '无法删除超级管理员角色'];
         }
         $roleModel::destroy($id);
@@ -179,8 +182,8 @@ class RoleController extends Controller {
         $input = $request->all();
         Validator::make($input, $rule)->validate();
         $roleModel = config('admin.database.roles_model');
-        $slugs = $roleModel::whereIn('id',$input)->pluck('slug')->toArray();
-        if(in_array('super_admin',$slugs)){
+        $slugs = $roleModel::whereIn('id', $input)->pluck('slug')->toArray();
+        if (in_array('super_admin', $slugs)) {
             return ['status' => 0, 'msg' => '无法删除超级管理员角色'];
         }
         $roleModel::destroy($input['ids']);

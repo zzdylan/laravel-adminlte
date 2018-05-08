@@ -72,7 +72,7 @@ class PermissionController extends Controller {
         $input = $request->all();
         Validator::make($input, $rule)->validate();
         $permissionModel = config('admin.database.permissions_model');
-        if($permissionModel::where('slug',$input['slug'])->exists()){
+        if ($permissionModel::where('slug', $input['slug'])->exists()) {
             return ['status' => 0, 'msg' => '权限标识已经存在'];
         }
         try {
@@ -113,6 +113,9 @@ class PermissionController extends Controller {
         $input = $request->all();
         Validator::make($input, $rule)->validate();
         $permissionModel = config('admin.database.permissions_model');
+        if ($permissionModel::where('id', '!=', $id)->where('slug', $input['slug'])->exists()) {
+            return ['status' => 0, 'msg' => '权限标识已经存在'];
+        }
         $permission = $permissionModel::find($id);
         try {
             $permission->update([
