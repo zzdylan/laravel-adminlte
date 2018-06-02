@@ -28,7 +28,7 @@ laravel-adminlte是一个简洁的后台管理系统基础框架
 
 克隆 `laravel-adminlte` 源代码到本地：
 
-    > git clone https://github.com/zzDylan/laravel-adminlte
+    git clone https://github.com/zzDylan/laravel-adminlte
 
 
 #### 2. 安装扩展包依赖
@@ -54,15 +54,19 @@ DB_USERNAME=root
 DB_PASSWORD=123456
 ```
 
-#### 4. 生成数据表及生成测试数据
+#### 4. 生成数据表
 
 在网站根目录下运行以下命令
 
 ```shell
-$ php artisan migrate
+php artisan migrate
 ```
 
-初始的表已使用数据迁移生成
+#### 5.生成菜单数据以及初始管理员数据
+
+```shell
+php artisan db:seed
+```
 
 
 #### 5. 生成秘钥
