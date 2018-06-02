@@ -69,7 +69,7 @@ php artisan db:seed
 ```
 
 
-#### 5. 生成秘钥
+#### 6. 生成秘钥
 
 ```shell
 php artisan key:generate
