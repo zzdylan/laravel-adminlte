@@ -41,7 +41,7 @@ laravel-adminlte是一个简洁的后台管理系统基础框架
 cp .env.example .env
 ```
 
-你可以根据情况修改 `.env` 文件里的内容，如数据库连接、缓存、邮件设置等：
+你可以根据情况修改 `.env` 文件里的内容，如数据库连接、缓存、邮件设置、七牛云存储等：
 
 ```
 APP_URL=http://localhost
@@ -52,6 +52,11 @@ DB_PORT=3306
 DB_DATABASE=laravel-adminlte
 DB_USERNAME=root
 DB_PASSWORD=123456
+
+QINIU_DEFAULT_DOMAIN=XXX
+QINIU_ACCESS_KEY=XXX
+QINIU_SECRET_KEY=XXX
+QINIU_BUCKET=XXX
 ```
 
 #### 4. 生成数据表
